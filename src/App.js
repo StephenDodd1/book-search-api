@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Header from './Header/Header';
+import SearchBar from './SearchBar/SearchBar';
+import BookResults from './BookResults/BookResults';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { 
+      books: [] 
+    }
+  }
+
+  onUpdate(data) {
+    this.setState({
+      books: data,
+    })
+  }
+
+  render() {
+    return (
+      <main>
+        <Header />
+        <SearchBar 
+          books = {this.state.books} 
+          onUpdate = {(data) => this.onUpdate(data)} />
+        <BookResults books = {this.state.books} />
+      </main>
+    );
+  }  
 }
 
 export default App;
